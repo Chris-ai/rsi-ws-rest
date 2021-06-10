@@ -3,7 +3,6 @@ package com.example.rsi.controller;
 import com.example.rsi.model.Car;
 import com.example.rsi.repository.CarRepository;
 import org.springframework.web.bind.annotation.*;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
