@@ -9,6 +9,8 @@ import com.example.rsi.repository.ReservationRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class RsiApplication implements CommandLineRunner {
     private RentRepository rentRepository;
     private ReservationRepository reservationRepository;
     private List<Car> carList = new ArrayList<>();
+    private List<Reservation> reservationList = new ArrayList<>();
 
     public static void main(String[] args) {
         SpringApplication.run(RsiApplication.class, args);
@@ -34,6 +37,7 @@ public class RsiApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //drop all cars
         carRepository.deleteAll();
+        rentRepository.deleteAll();
         rentRepository.deleteAll();
 
         carRepository.save(new Car(
@@ -73,12 +77,30 @@ public class RsiApplication implements CommandLineRunner {
 
         carList = carRepository.findAll();
 
-//        reservationRepository.save(new Reservation(
-//           carList.get(0).getId()
-//        ));
-//
-//        reservationRepository.save(new Reservation(
-//                carList.get(1).getId()
-//        ));
+        reservationRepository.save(new Reservation(
+           carList.get(0).getId()
+        ));
+
+        reservationRepository.save(new Reservation(
+                carList.get(1).getId()
+        ));
+
+        reservationRepository.save(new Reservation(
+                carList.get(2).getId()
+        ));
+
+        reservationList = reservationRepository.findAll();
+
+        rentRepository.save(new Rent(
+                reservationList.get(0).getReservationId(),
+                new Date().toString(),
+                100
+        ));
+
+        rentRepository.save(new Rent(
+                reservationList.get(1).getReservationId(),
+                new Date().toString(),
+                200
+        ));
     }
 }
