@@ -1,5 +1,6 @@
 package com.example.rsi.controller;
 
+import com.example.rsi.model.Car;
 import com.example.rsi.model.Reservation;
 import com.example.rsi.repository.ReservationRepository;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class ReservationController {
 
-    private ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
 
     public ReservationController(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
@@ -24,13 +25,27 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Reservation> getReservation(@PathVariable("id") String id){
+    public Optional<Reservation> getReservationById(@PathVariable("id") String id){
         return reservationRepository.findById(id);
     }
 
     @PostMapping("/create")
     public Reservation createReservation(@RequestBody Reservation reservation){
-        return reservationRepository.save(reservation);
+        reservationRepository.save(reservation);
+        return reservation;
+    }
+
+    @PutMapping("/update/{id}")
+    public Reservation editReservation(@PathVariable("id") String id, @RequestBody Reservation reservation){
+        Optional<Reservation> editedReservation = reservationRepository.findById(id);
+        if(editedReservation.isPresent()){
+            if(reservation.getCarId() != null)
+                editedReservation.get().setCarId(reservation.getCarId());
+
+            reservationRepository.save(editedReservation.get());
+            return editedReservation.get();
+        }
+        return null;
     }
 
     @DeleteMapping("/delete/{id}")

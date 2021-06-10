@@ -36,19 +36,22 @@ public class CarController {
     @PutMapping("/update/{id}")
     public Car editCar(@PathVariable("id") String id, @RequestBody Car car){
         Optional<Car> editedCar = carRepository.findById(id);
-        if(car.getCarBrand() != null)
-            editedCar.get().setCarBrand(car.getCarBrand());
-        if(car.getCarModel() != null)
-            editedCar.get().setCarModel(car.getCarModel());
-        if(car.getProductionYear() != 0)
-            editedCar.get().setProductionYear(car.getProductionYear());
-        if(car.getPrice() != 0)
-            editedCar.get().setPrice(car.getPrice());
-        if(car.getStatus() != 0)
-            editedCar.get().setStatus(car.getStatus());
+        if(editedCar.isPresent()){
+            if(car.getCarBrand() != null)
+                editedCar.get().setCarBrand(car.getCarBrand());
+            if(car.getCarModel() != null)
+                editedCar.get().setCarModel(car.getCarModel());
+            if(car.getProductionYear() != 0)
+                editedCar.get().setProductionYear(car.getProductionYear());
+            if(car.getPrice() != 0)
+                editedCar.get().setPrice(car.getPrice());
+            if(car.getStatus() != 0)
+                editedCar.get().setStatus(car.getStatus());
 
-        carRepository.save(editedCar.get());
-        return editedCar.get();
+            carRepository.save(editedCar.get());
+            return editedCar.get();
+        }
+        return null;
     }
 
     @DeleteMapping("/delete/{id}")
