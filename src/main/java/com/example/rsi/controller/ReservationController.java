@@ -24,7 +24,7 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Reservation> getAllReservations(@PathVariable("id") String id){
+    public Optional<Reservation> getReservation(@PathVariable("id") String id){
         return reservationRepository.findById(id);
     }
 
@@ -34,7 +34,7 @@ public class ReservationController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteResrvation(@PathVariable("id") String id){
+    public void deleteReservation(@PathVariable("id") String id){
         reservationRepository.deleteById(id);
     }
 
