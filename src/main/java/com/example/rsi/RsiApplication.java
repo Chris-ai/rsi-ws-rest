@@ -1,16 +1,24 @@
 package com.example.rsi;
 
 import com.example.rsi.model.Car;
+import com.example.rsi.model.Rent;
+import com.example.rsi.model.Reservation;
 import com.example.rsi.repository.CarRepository;
+import com.example.rsi.repository.RentRepository;
+import com.example.rsi.repository.ReservationRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.List;
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class RsiApplication implements CommandLineRunner {
 
-    public RsiApplication(CarRepository carRepository) {
+    public RsiApplication(CarRepository carRepository, RentRepository rentRepository, ReservationRepository reservationRepository) {
         this.carRepository = carRepository;
+        this.rentRepository = rentRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     private CarRepository carRepository;
@@ -26,6 +34,7 @@ public class RsiApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //drop all cars
         carRepository.deleteAll();
+        rentRepository.deleteAll();
 
         carRepository.save(new Car(
                 "Audi",
@@ -60,6 +69,13 @@ public class RsiApplication implements CommandLineRunner {
                 "Yaris",
                 2008,
                 50
+        ));
+
+        carList = carRepository.findAll();
+
+        reservationRepository.save(new Reservation(
+           carList.get(0).getId,
+
         ));
     }
 }
