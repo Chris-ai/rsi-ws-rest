@@ -5,37 +5,41 @@ import com.example.rsi.repository.ReservationRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/reservations")
 @CrossOrigin("*")
 public class ReservationController {
 
-    private ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
 
     public ReservationController(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 
+
     @GetMapping("/all")
     public List<Reservation> getAllReservations(){
-       return reservationRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Optional<Reservation> getAllReservations(@PathVariable("id") String id){
-        return reservationRepository.findById(id);
+        return reservationRepository.findAll();
     }
 
     @PostMapping("/create")
     public Reservation createReservation(@RequestBody Reservation reservation){
-        return reservationRepository.save(reservation);
+        reservationRepository.save(reservation);
+        return reservation;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteResrvation(@PathVariable("id") String id){
-        reservationRepository.deleteById(id);
-    }
+//    @PutMapping("/update")
+//    public Reservation editReservation(@RequestBody Reservation reservation){
+//        Reservation editedReservation = reservationRepository.findReservationById(reservation.getReservationId());
+//        editedReservation.setCarId(reservation.getCarId());
+//        return editedReservation;
+//    }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public void deleteReservation(@RequestParam String id){
+//        reservationRepository.delete(reservationRepository.findReservationById(id));
+//    }
 
 }
+

@@ -18,7 +18,6 @@ public class CarController {
         this.carRepository = carRepository;
     }
 
-
     @GetMapping("/all")
     public List<Car> getAllCars(){
         return carRepository.findAll();
@@ -35,10 +34,22 @@ public class CarController {
         return car;
     }
 
-    @PutMapping("/update")
-    public Car editCar(@RequestBody Car car){
-        carRepository.save(car);
-        return car;
+    @PutMapping("/update/{id}")
+    public Car editCar(@PathVariable("id") String id, @RequestBody Car car){
+        Optional<Car> editedCar = carRepository.findById(id);
+        if(car.getCarBrand() != null)
+            editedCar.get().setCarBrand(car.getCarBrand());
+        if(car.getCarModel() != null)
+            editedCar.get().setCarModel(car.getCarModel());
+        if(car.getProductionYear() != 0)
+            editedCar.get().setProductionYear(car.getProductionYear());
+        if(car.getPrice() != 0)
+            editedCar.get().setPrice(car.getPrice());
+        if(car.getStatus() != 0)
+            editedCar.get().setStatus(car.getStatus());
+
+        carRepository.save(editedCar.get());
+        return editedCar.get();
     }
 
     @DeleteMapping("/delete/{id}")

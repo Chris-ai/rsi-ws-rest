@@ -8,9 +8,9 @@ public class Reservation {
 
     @Id
     private String reservationId;
-    private int carId;
+    private String carId;
 
-    public Reservation(int carId){
+    public Reservation(String carId){
         this.carId = carId;
     }
 
@@ -22,11 +22,11 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public int getCarId() {
+    public String getCarId() {
         return carId;
     }
 
-    public void setCarId(int carId) {
+    public void setCarId(String carId) {
         this.carId = carId;
     }
 }

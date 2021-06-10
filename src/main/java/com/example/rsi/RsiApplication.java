@@ -73,9 +73,12 @@ public class RsiApplication implements CommandLineRunner {
 
         carList = carRepository.findAll();
 
-        reservationRepository.save(new Reservation(
-           carList.get(0).getId,
-
-        ));
+//        reservationRepository.save(new Reservation(
+//           carList.get(0).getId()
+//        ));
+//
+//        reservationRepository.save(new Reservation(
+//                carList.get(1).getId()
+//        ));
     }
 }

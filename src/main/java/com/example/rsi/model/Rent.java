@@ -8,11 +8,11 @@ public class Rent {
 
     @Id
     private String rentId;
-    private int reservationId;
+    private String reservationId;
     private String startDate;
     private int rentTime;
 
-    public Rent(int reservationId, String startDate, int rentTime) {
+    public Rent(String reservationId, String startDate, int rentTime) {
         this.reservationId = reservationId;
         this.startDate = startDate;
         this.rentTime = rentTime;
@@ -26,11 +26,11 @@ public class Rent {
         this.rentId = rentId;
     }
 
-    public int getReservationId() {
+    public String getReservationId() {
         return reservationId;
     }
 
-    public void setReservationId(int reservationId) {
+    public void setReservationId(String reservationId) {
         this.reservationId = reservationId;
     }
 
