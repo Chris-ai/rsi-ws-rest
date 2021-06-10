@@ -15,6 +15,7 @@ public class Car {
     private int price;
     private int status;
 
+
     public Car(String carBrand, String carModel, int productionYear, int price) {
         this.carBrand = carBrand;
         this.carModel = carModel;

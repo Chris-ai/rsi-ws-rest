@@ -14,6 +14,9 @@ public class RsiApplication implements CommandLineRunner {
     }
 
     private CarRepository carRepository;
+    private RentRepository rentRepository;
+    private ReservationRepository reservationRepository;
+    private List<Car> carList = new ArrayList<>();
 
     public static void main(String[] args) {
         SpringApplication.run(RsiApplication.class, args);

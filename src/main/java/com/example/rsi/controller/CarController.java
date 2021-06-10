@@ -2,10 +2,7 @@ package com.example.rsi.controller;
 
 import com.example.rsi.model.Car;
 import com.example.rsi.repository.CarRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,26 @@ public class CarController {
     @GetMapping("/all")
     public List<Car> getAllCars(){
         return carRepository.findAll();
+    }
+
+    @PostMapping("/create")
+    public Car createCar(@RequestBody Car car){
+        carRepository.save(car);
+        return car;
+    }
+
+    @PutMapping("/update")
+    public Car editCar(@RequestBody Car car){
+        Car editedCar = carRepository.findCarById(car.getId());
+        editedCar.setCarBrand(car.getCarBrand());
+        editedCar.setCarModel(car.getCarModel());
+
+        return editedCar;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteCar(@RequestParam String id){
+        carRepository.delete(carRepository.findCarById(id));
     }
 
 }
