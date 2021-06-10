@@ -3,8 +3,9 @@ package com.example.rsi.controller;
 import com.example.rsi.model.Car;
 import com.example.rsi.repository.CarRepository;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/cars")
@@ -23,6 +24,11 @@ public class CarController {
         return carRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Car> getCarById(@PathVariable("id") String id){
+        return carRepository.findById(id);
+    }
+
     @PostMapping("/create")
     public Car createCar(@RequestBody Car car){
         carRepository.save(car);
@@ -31,16 +37,13 @@ public class CarController {
 
     @PutMapping("/update")
     public Car editCar(@RequestBody Car car){
-        Car editedCar = carRepository.findCarById(car.getId());
-        editedCar.setCarBrand(car.getCarBrand());
-        editedCar.setCarModel(car.getCarModel());
-
-        return editedCar;
+        carRepository.save(car);
+        return car;
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCar(@RequestParam String id){
-        carRepository.delete(carRepository.findCarById(id));
+    public void deleteCar(@PathVariable("id") String id){
+        carRepository.deleteById(id);
     }
 
 }

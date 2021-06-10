@@ -4,8 +4,9 @@ import com.example.rsi.model.Car;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CarRepository extends MongoRepository<Car, String> {
-    Car findCarById(String id);
+    Optional<Car> findById(String id);
 }
-
