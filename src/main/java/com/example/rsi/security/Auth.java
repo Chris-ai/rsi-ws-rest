@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class Auth extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -22,7 +26,6 @@ public class Auth extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .httpBasic();
-
     }
 
     @Autowired
@@ -30,7 +33,11 @@ public class Auth extends WebSecurityConfigurerAdapter {
         authentication.inMemoryAuthentication()
                 .withUser("user")
                 .password(passwordEncoder().encode("user"))
-                .authorities("USER");
+                .roles("USER")
+                .and()
+                .withUser("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN");
     }
 
     @Bean

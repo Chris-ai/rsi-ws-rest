@@ -2,9 +2,12 @@ package com.example.rsi.controller;
 
 import com.example.rsi.model.Car;
 import com.example.rsi.repository.CarRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.Authentication;
 
 @RestController
 @RequestMapping("/cars")
@@ -15,6 +18,13 @@ public class CarController {
 
     public CarController(CarRepository carRepository) {
         this.carRepository = carRepository;
+    }
+
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 
     @GetMapping("/all")

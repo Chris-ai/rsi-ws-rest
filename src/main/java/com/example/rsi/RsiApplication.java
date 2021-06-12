@@ -9,11 +9,13 @@ import com.example.rsi.repository.ReservationRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+@ServletComponentScan
 @SpringBootApplication
 public class RsiApplication implements CommandLineRunner {
 
