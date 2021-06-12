@@ -4,6 +4,7 @@ import com.example.rsi.model.Rent;
 import com.example.rsi.repository.RentRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class RentController {
 
     @PostMapping("/create")
     public Rent createRent(@RequestBody Rent rent){
+        rent.setStartDate(new Date().toString());
         rentRepository.save(rent);
         return rent;
     }

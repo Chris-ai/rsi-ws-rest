@@ -14,6 +14,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @ServletComponentScan
 @SpringBootApplication
@@ -82,14 +83,23 @@ public class RsiApplication implements CommandLineRunner {
         reservationRepository.save(new Reservation(
            carList.get(0).getId()
         ));
+        Car car = carList.get(0);
+        car.setStatus(1);
+        carRepository.save(car);
 
         reservationRepository.save(new Reservation(
                 carList.get(1).getId()
         ));
+        car = carList.get(1);
+        car.setStatus(1);
+        carRepository.save(car);
 
         reservationRepository.save(new Reservation(
                 carList.get(2).getId()
         ));
+        car = carList.get(2);
+        car.setStatus(1);
+        carRepository.save(car);
 
         reservationList = reservationRepository.findAll();
 

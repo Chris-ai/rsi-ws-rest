@@ -2,6 +2,7 @@ package com.example.rsi.controller;
 
 import com.example.rsi.model.Car;
 import com.example.rsi.model.Reservation;
+import com.example.rsi.repository.CarRepository;
 import com.example.rsi.repository.ReservationRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,11 @@ import java.util.Optional;
 public class ReservationController {
 
     private final ReservationRepository reservationRepository;
+    private final CarRepository carRepository;
 
-    public ReservationController(ReservationRepository reservationRepository) {
+    public ReservationController(ReservationRepository reservationRepository, CarRepository carRepository) {
         this.reservationRepository = reservationRepository;
+        this.carRepository = carRepository;
     }
 
     @GetMapping("/all")
@@ -31,6 +34,9 @@ public class ReservationController {
 
     @PostMapping("/create")
     public Reservation createReservation(@RequestBody Reservation reservation){
+        Optional<Car> car = carRepository.findById(reservation.getCarId());
+        car.get().setStatus(1);
+        carRepository.save(car.get());
         reservationRepository.save(reservation);
         return reservation;
     }
