@@ -40,7 +40,7 @@ public class RsiApplication implements CommandLineRunner {
         //drop all cars
         carRepository.deleteAll();
         rentRepository.deleteAll();
-        rentRepository.deleteAll();
+        reservationRepository.deleteAll();
 
         carRepository.save(new Car(
                 "Audi",
