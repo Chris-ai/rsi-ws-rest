@@ -1,0 +1,15 @@
+admin, [ROLE_ADMIN], Sun Jun 13 20:11:22 CEST 2021, url: /cars/all, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:11:23 CEST 2021, url: /favicon.ico, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:11:30 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:14:10 CEST 2021, url: /v2/application, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:14:13 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+user, [ROLE_USER], Sun Jun 13 20:15:20 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:21:31 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:21:49 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:21:49 CEST 2021, url: /favicon.ico, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:25:47 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:27:11 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:27:25 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:29:17 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:31:16 CEST 2021, url: /v2/application.wadl, method: GET, status: 200
+admin, [ROLE_ADMIN], Sun Jun 13 20:31:16 CEST 2021, url: /favicon.ico, method: GET, status: 200
