@@ -10,6 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Date;
 import java.util.List;
@@ -81,21 +84,25 @@ public class RsiApplication implements CommandLineRunner {
         carList = carRepository.findAll();
 
         reservationRepository.save(new Reservation(
-           carList.get(0).getId()
+                carList.get(0).getId(),
+                carList.get(0).getCarBrand() + " " + carList.get(0).getCarModel()
+
         ));
         Car car = carList.get(0);
         car.setStatus(1);
         carRepository.save(car);
 
         reservationRepository.save(new Reservation(
-                carList.get(1).getId()
+                carList.get(1).getId(),
+                carList.get(1).getCarBrand() + " " + carList.get(1).getCarModel()
         ));
         car = carList.get(1);
         car.setStatus(1);
         carRepository.save(car);
 
         reservationRepository.save(new Reservation(
-                carList.get(2).getId()
+                carList.get(2).getId(),
+                carList.get(2).getCarBrand() + " " + carList.get(2).getCarModel()
         ));
         car = carList.get(2);
         car.setStatus(1);
@@ -106,13 +113,21 @@ public class RsiApplication implements CommandLineRunner {
         rentRepository.save(new Rent(
                 reservationList.get(0).getReservationId(),
                 new Date().toString(),
-                100
+                100,
+                carList.get(0).getCarBrand() + " " + carList.get(0).getCarModel()
         ));
+        car = carList.get(0);
+        car.setStatus(2);
+        carRepository.save(car);
 
         rentRepository.save(new Rent(
                 reservationList.get(1).getReservationId(),
                 new Date().toString(),
-                200
+                200,
+                carList.get(1).getCarBrand() + " " + carList.get(1).getCarModel()
         ));
+        car = carList.get(1);
+        car.setStatus(2);
+        carRepository.save(car);
     }
 }

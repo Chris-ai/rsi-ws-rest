@@ -12,10 +12,21 @@ public class Rent {
     private String startDate;
     private int rentTime;
 
-    public Rent(String reservationId, String startDate, int rentTime) {
+    public String getCarInfo() {
+        return carInfo;
+    }
+
+    public void setCarInfo(String carInfo) {
+        this.carInfo = carInfo;
+    }
+
+    private String carInfo;
+
+    public Rent(String reservationId, String startDate, int rentTime, String carInfo) {
         this.reservationId = reservationId;
         this.startDate = startDate;
         this.rentTime = rentTime;
+        this.carInfo = carInfo;
     }
 
     public String getRentId() {

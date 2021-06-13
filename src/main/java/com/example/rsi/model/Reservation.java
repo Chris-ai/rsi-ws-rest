@@ -10,8 +10,19 @@ public class Reservation {
     private String reservationId;
     private String carId;
 
-    public Reservation(String carId){
+    public String getCarInfo() {
+        return carInfo;
+    }
+
+    public void setCarInfo(String carInfo) {
+        this.carInfo = carInfo;
+    }
+
+    private String carInfo;
+
+    public Reservation(String carId, String carInfo){
         this.carId = carId;
+        this.carInfo = carInfo;
     }
 
     public String getReservationId() {

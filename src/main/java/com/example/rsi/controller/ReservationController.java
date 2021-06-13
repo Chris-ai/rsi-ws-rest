@@ -34,9 +34,6 @@ public class ReservationController {
 
     @PostMapping("/create")
     public Reservation createReservation(@RequestBody Reservation reservation){
-        Optional<Car> car = carRepository.findById(reservation.getCarId());
-        car.get().setStatus(1);
-        carRepository.save(car.get());
         reservationRepository.save(reservation);
         return reservation;
     }

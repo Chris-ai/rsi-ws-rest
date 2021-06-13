@@ -20,13 +20,6 @@ public class CarController {
         this.carRepository = carRepository;
     }
 
-    @GetMapping("/user")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String getUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
-    }
-
     @GetMapping("/all")
     public List<Car> getAllCars(){
         return carRepository.findAll();
@@ -58,6 +51,17 @@ public class CarController {
             if(car.getStatus() != 0)
                 editedCar.get().setStatus(car.getStatus());
 
+            carRepository.save(editedCar.get());
+            return editedCar.get();
+        }
+        return null;
+    }
+
+    @PostMapping("/updateStatus/{id}/{stat}")
+    public Car editCarStatus(@PathVariable("id") String id, @PathVariable("stat") int status){
+        Optional<Car> editedCar = carRepository.findById(id);
+        if(editedCar.isPresent()){
+            editedCar.get().setStatus(status);
             carRepository.save(editedCar.get());
             return editedCar.get();
         }
